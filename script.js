@@ -1,4 +1,5 @@
 let computerChoice;
+let playerChoice;
 
 function getComputerChoice() {
      let random_number = Math.floor(Math.random() * 3);
@@ -18,5 +19,12 @@ function getComputerChoice() {
 
 }
 
+function getPlayerChoice() {
+    playerChoice = prompt("Rock Paper Scissors");
+    playerChoice = playerChoice.toUpperCase();
+}
+
 getComputerChoice();
+getPlayerChoice();
 console.log(computerChoice);
+console.log(playerChoice);
