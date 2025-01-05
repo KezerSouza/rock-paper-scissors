@@ -21,7 +21,16 @@ function getComputerChoice() {
 
 function getPlayerChoice() {
     playerChoice = prompt("Rock Paper Scissors");
-    playerChoice = playerChoice.toUpperCase();
+    playerChoice = playerChoice.toLowerCase();
+    verifyPlayerChoice();
+}
+
+function verifyPlayerChoice() {
+    if(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
+        return
+    }
+    playerChoice = prompt("You need to input a valid value (rock, paper, or scissors)");
+    verifyPlayerChoice();
 }
 
 getComputerChoice();
