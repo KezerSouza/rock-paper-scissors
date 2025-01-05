@@ -1,5 +1,6 @@
 let computerChoice;
 let playerChoice;
+let winner;
 
 function getComputerChoice() {
      let random_number = Math.floor(Math.random() * 3);
@@ -33,7 +34,30 @@ function verifyPlayerChoice() {
     verifyPlayerChoice();
 }
 
+function verifyWinner() {
+    if(playerChoice == "rock") {
+        if(computerChoice == "rock") return "Draw";
+        if(computerChoice == "paper") return "Computer";
+        if(computerChoice == "scissors") return "Player";
+    }
+
+    if(playerChoice == 'paper') {
+        if(computerChoice == "rock") return "Player";
+        if(computerChoice == "paper") return "Draw";
+        if(computerChoice == "scissors") return "Computer";
+    }
+
+    if(playerChoice == "scissors") {
+        if(computerChoice == "rock") return "Computer";
+        if(computerchoice == "paper") return "Player";
+        if(computerChoice == "scissors") return "Draw";
+    }
+
+}
+
 getComputerChoice();
 getPlayerChoice();
-console.log(computerChoice);
-console.log(playerChoice);
+
+winner = verifyWinner();
+if(winner == "Draw") console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. It's a draw!`);
+else console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. ${winner} won!`);
