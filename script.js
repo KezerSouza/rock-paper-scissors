@@ -21,11 +21,11 @@ function getComputerChoice() {
 
 function getPlayerChoice() {
     playerChoice = prompt("Rock Paper Scissors");
-    playerChoice = playerChoice.toLowerCase();
     verifyPlayerChoice();
 }
 
 function verifyPlayerChoice() {
+    playerChoice = playerChoice.toLowerCase();
     if(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
         return
     }
