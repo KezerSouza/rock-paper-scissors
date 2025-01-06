@@ -1,6 +1,8 @@
 let computerChoice;
 let playerChoice;
 let winner;
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
      let random_number = Math.floor(Math.random() * 3);
@@ -49,7 +51,7 @@ function verifyWinner() {
 
     if(playerChoice == "scissors") {
         if(computerChoice == "rock") return "Computer";
-        if(computerchoice == "paper") return "Player";
+        if(computerChoice == "paper") return "Player";
         if(computerChoice == "scissors") return "Draw";
     }
 
@@ -62,7 +64,16 @@ function start() {
 
     winner = verifyWinner();
     if(winner == "Draw") console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. It's a draw!`);
-    else console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. ${winner} won!`);
+    else if(winner == "Player") {
+        console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. Player won!`);
+        playerScore++;
+    }
+    else {
+        console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. Computer won!`);
+        computerScore++;
+    }
+
+    console.log("--Scoreboard--\n"+`Player: ${playerScore} | Computer: ${computerScore}`);
 
     start();
 }
