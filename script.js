@@ -55,9 +55,16 @@ function verifyWinner() {
 
 }
 
-getComputerChoice();
-getPlayerChoice();
 
-winner = verifyWinner();
-if(winner == "Draw") console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. It's a draw!`);
-else console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. ${winner} won!`);
+function start() {
+    getComputerChoice();
+    getPlayerChoice();
+
+    winner = verifyWinner();
+    if(winner == "Draw") console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. It's a draw!`);
+    else console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. ${winner} won!`);
+
+    start();
+}
+
+start();
