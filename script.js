@@ -1,8 +1,18 @@
 let computerChoice;
-let playerChoice;
 let winner;
 let playerScore = 0;
 let computerScore = 0;
+
+let rockButton = document.querySelector(".rock-button");
+let paperButton = document.querySelector(".paper-button");
+let scissorsButton = document.querySelector(".scissors-button");
+
+let resultText = document.querySelector(".results .results-text");
+
+let playerScoreDom = document.querySelector(".player-score-value");
+let computerScoreDom = document.querySelector(".computer-score-value");
+
+let winnerText = document.querySelector(".game-winner .game-winner-text");
 
 function getComputerChoice() {
      let random_number = Math.floor(Math.random() * 3);
@@ -22,21 +32,7 @@ function getComputerChoice() {
 
 }
 
-function getPlayerChoice() {
-    playerChoice = prompt("Rock Paper Scissors");
-    verifyPlayerChoice();
-}
-
-function verifyPlayerChoice() {
-    playerChoice = playerChoice.toLowerCase();
-    if(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
-        return
-    }
-    playerChoice = prompt("You need to input a valid value (rock, paper, or scissors)");
-    verifyPlayerChoice();
-}
-
-function verifyWinner() {
+function verifyWinner(playerChoice) {
     if(playerChoice == "rock") {
         if(computerChoice == "rock") return "Draw";
         if(computerChoice == "paper") return "Computer";
@@ -57,25 +53,56 @@ function verifyWinner() {
 
 }
 
+function announceWinner(winner) {
+    if(winner == "player") {
+        winnerText.textContent = "Fim de jogo! Player venceu";
+    }else if(winner == "computer") {
+        winnerText.textContent = "Fim de jogo! Computador venceu"; 
+    }
+}
 
-function start() {
+function updateScoreboard() {
+    
+    console.log(playerScoreDom);
+    playerScoreDom.textContent = playerScore;
+    computerScoreDom.textContent = computerScore;
+
+    if(playerScore >= 5) {
+        announceWinner("player");
+    }else if (computerScore >= 5) {
+        announceWinner("computer");
+    }
+
+}
+
+function start(playerChoice) {
+
     getComputerChoice();
-    getPlayerChoice();
 
-    winner = verifyWinner();
-    if(winner == "Draw") console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. It's a draw!`);
+    winner = verifyWinner(playerChoice);
+    if(winner == "Draw") resultText.textContent = `Player selected ${playerChoice}, Computer selected ${computerChoice}. It's a draw!`;
     else if(winner == "Player") {
-        console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. Player won!`);
+        resultText.textContent = `Player selected ${playerChoice}, Computer selected ${computerChoice}. Player won!`;
         playerScore++;
     }
     else {
-        console.log(`Player selected ${playerChoice}, Computer selected ${computerChoice}. Computer won!`);
+        resultText.textContent = `Player selected ${playerChoice}, Computer selected ${computerChoice}. Computer won!`;
         computerScore++;
     }
 
+    updateScoreboard();
     console.log("--Scoreboard--\n"+`Player: ${playerScore} | Computer: ${computerScore}`);
 
-    start();
 }
 
-start();
+rockButton.addEventListener("click", function() {
+    start("rock");
+});
+
+paperButton.addEventListener("click", function() {
+    start("paper");
+});
+
+scissorsButton.addEventListener("click", function() {
+    start("scissors");
+});
